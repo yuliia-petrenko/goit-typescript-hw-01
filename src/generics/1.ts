@@ -1,13 +1,5 @@
 import axios from 'axios';
 
-// async function fetchData(url) {
-//   try {
-//     const response = await axios.get(url);
-//     return response.data;
-//   } catch (error) {
-//     throw new Error(`Error fetching from ${url}: ${error}`);
-//   }
-// }
 
 async function fetchData<T>(url: string): Promise<T> {
   try {
@@ -18,18 +10,18 @@ async function fetchData<T>(url: string): Promise<T> {
   }
 }
 
-
-interface IFetchedTodos{
-  userId: number;
-  id: number;
-  title: string;
-  completed: boolean
+interface ResponseObject {
+  name: string;
+  age: number;
 }
 
-fetchData<IFetchedTodos[]>('https://jsonplaceholder.typicode.com/todos')
-.then((results) => {
-  console.log('Received data:', results);
-})
-.catch((error) => {
-  console.error('Error fetching data:', error.message);
-});
+async function getObject() {
+  try {
+    const data = await fetchData<ResponseObject>("");
+    console.log(data);
+  } catch (error) {
+    console.log(error);
+  }
+}
+
+getObject();
